@@ -3,27 +3,35 @@ import {Link} from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import Rating from './Rating'
 
+//This is a component that has all the information of a product in a card 
+
 const Product = (props) => {
     return (
         <Card className='my-3 p-3 rounded'>
+
+            // Clickable Image 
             <Link to={`/product/${props.product._id}`}>
                 <Card.Img src={props.product.image} varient='top'/>
             </Link>
+
+            // Card.Body is Clickable. When clicked on, it takes you to the products page
+            // It has the products id, name, rating,numReviews and price 
             <Card.Body>
                 <Link to={`/product/${props.product._id}`}>
-                <Card.Title as='div'>
-                    <strong>
-                        {props.product.name}
-                    </strong>
-                </Card.Title>
+                    <Card.Title as='div'>
+                        <strong>
+                            {props.product.name}
+                        </strong>
+                    </Card.Title>
                 </Link>
+
                 <Card.Text as='div'>
                     <Rating 
                         value={props.product.rating}
                         text={`${props.product.numReviews} reviews`}
                     />
                 </Card.Text>
-            <Card.Text as='h3'>${props.product.price}</Card.Text>
+                <Card.Text as='h3'>${props.product.price}</Card.Text>
             </Card.Body>
             
         </Card>

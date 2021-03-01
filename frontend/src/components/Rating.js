@@ -1,5 +1,10 @@
 import React from 'react'
 
+
+//Not sure with the conditional statement -need to review 
+// sort of understand where value and text are coming from but not entierly sure 
+//Not tou sure about defaultProps
+
 const Rating = ({value, text, color}) => {
     return (
         <div className='rating'>
@@ -7,31 +12,34 @@ const Rating = ({value, text, color}) => {
                 <i style={{color}}
                 className={value >= 1 ? 'fas fa-star':value >= 0.5? 'fas fa-start-half-alt' :'far fa-star'}></i>
             </span>
-            <span>
-            <i style={{color}}
-                className={value >= 2 ? 'fas fa-star':value >= 1.5? 'fas fa-start-half-alt' :'far fa-star'}>
-            </i>
-            </span>
-            <span>
-            <i style={{color}}
-                 className={value >= 3 ? 'fas fa-star':value >= 2.5? 'fas fa-start-half-alt' :'far fa-star'}>
 
-            </i>
+            <span>
+                <i style={{color}}
+                    className={value >= 2 ? 'fas fa-star':value >= 1.5? 'fas fa-start-half-alt' :'far fa-star'}>
+                </i>
+            </span>
+
+            <span>
+                 <i style={{color}}
+                    className={value >= 3 ? 'fas fa-star':value >= 2.5? 'fas fa-start-half-alt' :'far fa-star'}>
+                 </i>
             </span>
             
             <span>
-            <i style={{color}}
-                className={value >= 4 ? 'fas fa-star':value >= 3.5? 'fas fa-start-half-alt' :'far fa-star'}>
-        
-            </i>
+                <i style={{color}}
+                    className={value >= 4 ? 'fas fa-star':value >= 3.5? 'fas fa-start-half-alt' :'far fa-star'}>
+                </i>
             </span>
 
             <span>
-            <i style={{color}} 
-                className={value >= 5 ? 'fas fa-star':value >= 4.5? 'fas fa-start-half-alt' :'far fa-star'}>    
-            </i>
+                 <i style={{color}} 
+                    className={value >= 5 ? 'fas fa-star':value >= 4.5? 'fas fa-start-half-alt' :'far fa-star'}>    
+                </i>
             </span>
-            <span>{text ? text : ''}</span>
+
+            <span>
+                {text ? text : ''}
+            </span>
             
         </div>
     )
@@ -41,11 +49,7 @@ Rating.defaultProps = {
     color : '#f8e825',
 }
 
-// Rating.PropTypes = {
-//     value: PropTypes.number.isRequired,
-//     text:  PropTypes.string.isRequired,
-//     color: PropTypes.string,
-// }
+
 
 export default Rating
  
