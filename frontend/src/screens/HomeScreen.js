@@ -6,11 +6,11 @@ import axios from 'axios'
 
 const HomeScreen = () => {
 
-    // Has something to do with state
+ 
     const [products, setProducts] = useState([])
 
         useEffect(()=>{
-            //Feteches a product from the backend by making a get request using axios
+            
             const fetchProducts = async () =>{
                 const { data } = await axios.get('/api/products')
                 
@@ -24,7 +24,7 @@ const HomeScreen = () => {
 
     return (
         <>
-            //Goes thru the object and displays all the products by utilizing the product component 
+           
             
             <h1>Latest products</h1>
             <Row>

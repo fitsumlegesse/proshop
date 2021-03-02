@@ -6,17 +6,15 @@ import axios from 'axios'
 
 const ProductScreen = ({match}) => {
 
-    //has something to do with state 
+    
    const [product, setProduct] = useState({})
 
-   //What exactly is the useEffect
    useEffect(()=>{
 
-       //Fetching a particular product using an It's id from the URL
     const fetchProduct = async () =>{
         const { data } = await axios.get(`/api/products/${match.params.id}`)
         
-        //What exactly is a match?
+       
         setProduct(data)
     }
 
@@ -26,7 +24,7 @@ const ProductScreen = ({match}) => {
     },[match])
 
     return( 
-    // Dispays the paticular product grabbed by the above function
+   
     <>
     <Link className='btn btn-dark my-3' to='/'> 
         {/* {product.name} */}
