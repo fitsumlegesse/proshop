@@ -14,6 +14,7 @@ const ProductScreen = ( {history, match}) => {
     const [qty, setQty] = useState(1)
 
     const dispatch = useDispatch()
+
     const productDetails = useSelector(state => state.productDetails)
 
     const {loading, error, product} = productDetails
@@ -89,22 +90,21 @@ const ProductScreen = ( {history, match}) => {
                         {product.countInStock > 0 && (
                             <ListGroup.Item>
                                 <Row>
-                                <Col>Qty</Col>
-                                <Col>
-                                    <Form.Control
-                                        as= 'select' 
-                                        value={qty} 
-                                        onChange={(e)=>setQty(e.target.value)}
+                                    <Col>Qty</Col>
+                                    <Col>
+                                        <Form.Control
+                                         as= 'select' 
+                                         value={qty} 
+                                         onChange={(e)=>setQty(e.target.value)}
                                         >
-
-                                                {
-                                                    [...Array(product.countInStock).keys()].map(x =>(
-                                                        <option key={x + 1} value={x+1}>
-                                                            {x + 1}
-                                                        </option>
-                                                    ))
-                                                } 
-                                    </Form.Control>
+                                        {
+                                            [...Array(product.countInStock).keys()].map(x =>(
+                                                <option key={x + 1} value={x+1}>
+                                                    {x + 1}
+                                                </option>
+                                            ))
+                                        } 
+                                        </Form.Control>
                                 </Col>
 
                             </Row>
