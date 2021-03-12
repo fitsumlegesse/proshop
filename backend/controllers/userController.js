@@ -12,6 +12,9 @@ const authUser = asyncHandler( async (req,res)=>{
 
    const user = await User.findOne({email})
    
+   //does the matchPassword() convert the userinputted password to a hash and then compare it ?
+   // I think, the schema.methods.mP() convert the text pw to a hash and then convert it 
+   
    if(user && (await user.matchPassword(password)))
    {
        res.json(
@@ -29,5 +32,29 @@ const authUser = asyncHandler( async (req,res)=>{
    }
 })
 
+//@Auth get user profile 
+//@route  GET /api/users/profile
+//@access  Private
+const getUserProfile = asyncHandler( async (req,res)=>{
+  
+    const user = await User.findById(req.user._id)
 
-export { authUser }
+    if(user){
+        res.json({
+            _id: user._id,
+            name:user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        })
+
+
+    }else{
+        res.status(404)
+        throw new Error('User not found.')
+    }
+})
+
+
+
+
+export { authUser, getUserProfile }
