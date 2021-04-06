@@ -6,22 +6,43 @@ import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 
-const PlaceOrderScreen = ({history}) => 
+const PlaceOrderScreen = ({ history }) => 
 {
     const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart)
 
-    const orderCreate = useSelector(state => state.orderCreate)
-    const { order, success, error} = orderCreate
+    
 
+    // Calculate Price
+    const addDecimals = (num)=>{
+        return(Math.round(num * 100)/100).toFixed(2)
+    }
+
+    cart.itemsPrice = addDecimals(
+        cart.cartItems.reduce((acc, item)=> acc + item.price * item.qty,0)
+        )
+
+    cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 25)
+    cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
+    cart.totalPrice = (
+        Number(cart.itemsPrice) + 
+        Number(cart.shippingPrice) +
+         Number(cart.taxPrice)
+         ).toFixed(2)
+
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order,success, error} = orderCreate
+    
+     
     useEffect(()=>{
         if(success){
-            history.push(`/order/${order._id}`)
+            history.push(`/order/${order.createdOrder._id}`)
+            
         }
-        // eslint-disable-next-line
+      
     }, [history, success])
-
+    
     const placeOrderHandler = ()=>{
         dispatch(createOrder({
             orderItems: cart.cartItems,
@@ -33,20 +54,6 @@ const PlaceOrderScreen = ({history}) =>
             totalPrice: cart.totalPrice,
         }))
     }
-
-    // Calculate Price
-    const addDecimals = (num)=>{
-        return(Math.round(num * 100)/100).toFixed(2)
-    }
-
-    cart.itemsPrice = addDecimals(cart.cartItems.reduce(
-        (acc, item)=> acc + item.price * item.qty,
-        0
-    ))
-
-    cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 25)
-    cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
-    cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
     return (
         <>
